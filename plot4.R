@@ -12,8 +12,14 @@ plot4 <-function(fname="household_power_consumption.txt")
   colnames(selectdf) <- c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3")
 
   datetimeData <- strptime(paste(as.character(selectdf$Date),selectdf$Time),"%Y-%m-%d %H:%M:%S")
+ 
+  
+  #create a file device for the plot
+  png(file = "plot4.png");
+  
   #set up the plot window to display four plots
   par(mfrow = c(2,2))
+  
   #plot 1
   with(selectdf,plot(datetimeData,selectdf$Global_active_power,type = "l",xlab = "", ylab = "Global Active Power (kilowatts)" ))
   
@@ -30,7 +36,7 @@ plot4 <-function(fname="household_power_consumption.txt")
   with(selectdf,plot(datetimeData,selectdf$Global_reactive_power,type = "l",xlab = "datetime", ylab = "Global_reactive_power" ))
                      
   #save the graph to a png file
-  dev.copy(png,file = "plot4.png")
+  #dev.copy(png,file = "plot4.png")
   dev.off()
   
 }
